@@ -34,12 +34,19 @@ namespace UserManager
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "UserManager", Version = "v1" });
             });
 
-            services.AddDbContext<UserContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
+            services.AddDbContext<UserContext>(options => 
+                options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors(options => 
+                options.WithOrigins(Configuration.GetValue<string>("AngularApp:URL"))
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

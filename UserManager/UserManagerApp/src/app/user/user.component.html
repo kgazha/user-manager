@@ -7,6 +7,23 @@
         <app-user-form></app-user-form>
     </div>
     <div class="col-md-6">
-        <span>Детали</span>
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th>Имя пользователя</th>
+                    <th>Email</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of service.users">
+                    <td>{{ user.userName }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>
+                        <i class="far fa-trash-alt fa-lg text-danger"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
