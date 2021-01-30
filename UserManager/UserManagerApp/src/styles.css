@@ -1,1 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
+.mb-3 label {
+    color: grey;
+}
+
+.mb-3 input {
+    font-weight: 500;
+}
+
+.mb-3 input::placeholder {
+    color: #c0c0c0;
+    font-weight: 300;
+}
+
+thead th {
+    font-weight: 400;
+}
+
+table tbody tr:hover {
+    background-color: #fffaf0;
+    cursor: pointer;
+}
+
+input.invalid {
+    border-color: red;
+}
