@@ -1,0 +1,19 @@
+<form>
+    <input type="hidden" name="userId"
+    [value]="service.formData.id" />
+    <div class="form-group">
+        <label>Имя пользователя</label>
+        <input class="form-control form-control-lg" placeholder="Полное имя"
+        name="userName" #userName="ngModel" [(ngModel)]="service.formData.userName">
+    </div>
+    <div class="form-group">
+        <label>Email</label>
+        <input class="form-control form-control-lg" placeholder="Email"
+        name="email" #email="ngModel" [(ngModel)]="service.formData.email">
+    </div>
+    <div class="form-group">
+        <label>Пароль</label>
+        <input type="password" class="form-control form-control-lg" placeholder="Пароль"
+        name="password" #password="ngModel" [(ngModel)]="service.formData.password">
+    </div>
+</form>
