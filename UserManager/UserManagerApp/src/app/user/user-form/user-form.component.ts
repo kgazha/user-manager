@@ -19,15 +19,37 @@ export class UserFormComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
+    if (this.service.formData.id == 0) {
+      this.insertRecord(form);
+    }
+    else {
+      this.updateRecord(form);
+    }
+  }
+
+  insertRecord(form: NgForm) {
     this.service.postUser().subscribe(
       response => {
         this.resetForm(form);
         this.toastr.success('Пользователь добавлен');
+        this.service.refreshUsers();
       },
       error => {
         console.log(error);
       }
-      
+    );
+  }
+
+  updateRecord(form: NgForm) {
+    this.service.putUser().subscribe(
+      response => {
+        this.resetForm(form);
+        this.toastr.success('Пользователь успешно обновлён');
+        this.service.refreshUsers();
+      },
+      error => {
+        console.log(error);
+      }
     );
   }
 
