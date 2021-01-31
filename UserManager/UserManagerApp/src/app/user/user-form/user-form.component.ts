@@ -34,8 +34,15 @@ export class UserFormComponent implements OnInit {
         this.toastr.success('Пользователь добавлен');
         this.service.refreshUsers();
       },
-      error => {
-        console.log(error);
+      errorResponse => {
+        console.log(errorResponse);
+        if ('error' in errorResponse) {
+          if ('errors' in errorResponse.error) {
+            for (const message of errorResponse.error.errors) {
+              this.toastr.error(message);
+            }
+          }
+        }
       }
     );
   }
@@ -47,8 +54,15 @@ export class UserFormComponent implements OnInit {
         this.toastr.success('Пользователь успешно обновлён');
         this.service.refreshUsers();
       },
-      error => {
-        console.log(error);
+      errorResponse => {
+        console.log(errorResponse);
+        if ('error' in errorResponse) {
+          if ('errors' in errorResponse.error) {
+            for (const message of errorResponse.error.errors) {
+              this.toastr.error(message);
+            }
+          }
+        }
       }
     );
   }
