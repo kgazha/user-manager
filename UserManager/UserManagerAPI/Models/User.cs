@@ -16,7 +16,7 @@ namespace UserManagerAPI.Models
         [Column(TypeName = "nvarchar(50)")]
         public override string Email { get; set; }
 
-        [Column(TypeName = "nvarchar(20)")]
+        [NotMapped]
         public string Password { get; set; }
     }
 }
