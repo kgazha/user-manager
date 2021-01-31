@@ -3,19 +3,19 @@
     [value]="service.formData.id" />
     <div class="mb-3">
         <label>Имя пользователя</label>
-        <input class="form-control form-control-lg" placeholder="Полное имя"
+        <input class="form-control form-control-lg" placeholder="Укажите имя пользователя"
             name="userName" #userName="ngModel" [(ngModel)]="service.formData.userName"
             required [class.invalid]="userName.invalid && userName.touched">
     </div>
     <div class="mb-3">
         <label>Email</label>
-        <input class="form-control form-control-lg" placeholder="Email"
+        <input class="form-control form-control-lg" placeholder="Введите email"
             name="email" #email="ngModel" [(ngModel)]="service.formData.email"
             required maxlength="50" [class.invalid]="email.invalid && email.touched">
     </div>
     <div class="mb-3">
         <label>Пароль</label>
-        <input type="password" class="form-control form-control-lg" placeholder="Пароль"
+        <input type="password" class="form-control form-control-lg" placeholder="Пароль должен состоять из шести или более символов"
             name="password" #password="ngModel" [(ngModel)]="service.formData.password"
             required maxlength="20" minlength="6" [class.invalid]="password.invalid && password.touched">
     </div>
