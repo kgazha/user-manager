@@ -1,20 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Localization;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Reflection;
 using UserManagerAPI.Models;
 using UserManagerAPI.Translation;
 
@@ -32,6 +24,7 @@ namespace UserManagerAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -39,17 +32,15 @@ namespace UserManagerAPI
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "UserManager", Version = "v1" });
             });
 
-            //services.AddIdentity<User, IdentityRole<int>>()
-            //    .AddEntityFrameworkStores<UserContext>()
-            //    .AddErrorDescriber<RussianIdentityErrorDescriber>();
-            services.AddIdentity<User, IdentityRole<int>>()
+            services.AddIdentity<ApplicationUser, IdentityRole<int>>()
                 .AddEntityFrameworkStores<UserContext>()
-                .AddTokenProvider<DataProtectorTokenProvider<User>>(TokenOptions.DefaultProvider)
+                .AddTokenProvider<DataProtectorTokenProvider<ApplicationUser>>(TokenOptions.DefaultProvider)
                 .AddErrorDescriber<RussianIdentityErrorDescriber>();
-
+            
 
             services.AddDbContext<UserContext>(options => 
                 options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
+            
             services.AddCors();
         }
 
